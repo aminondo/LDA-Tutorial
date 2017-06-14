@@ -12,23 +12,25 @@ library(ISLR)
 # as a linear combination of other independent variables
 
 # SMARKET ---------------------------------------------------------------------------------------
-# We are going to use Smarket data to try and predict whether market will go up or down by classifying
-
+# We are going to use Smarket data to try and predict whether market will go up or down
+head(Smarket)
+#our dependent variable will be Direction and this is the variable we are trying to predict
 #separate data into train and test data
-
-
 train.index = sample(c(T, F), nrow(Smarket), replace = TRUE, prob = c(0.8, 0.2))
-#
-data = split(Smarket, train.index)
-names(data) = c("test", "train")
-nrow(data$train)
+market_data = split(Smarket, train.index)
+names(market_data) = c("test", "train")
+
+#use MASS lda function using train data
 lda_fit = lda(Direction ~ .,data=data$train)
 lda_fit
 
+#predict using test data
 lda_predict = predict(lda_fit, newdata = data$test)
+#confusion matrix to establish how accurate our results are
 table(lda_predict$class,data$test$Direction)
 
-#Now we are going to use Default data to predict whether someone will default on a loan
+# DEFAULT--------------------------------------------------------------------------------------------------------------------
+#Now we are going to use Default data to predict whether someone will default on a loan like we did in class yesterday
 head(Default)
 
 train.index = sample(c(T,F), nrow(Default), replace=T, prob = c(.8,.2))
