@@ -40,6 +40,20 @@ colnames(output) <- c("Input","Expected Output","Neural Net Output")
 
 print(output)
 
+#Test the neural network 
+testdata <- as.data.frame((11:20)^2) 
+net.results <- compute(net.sqrt, testdata) 
+
+#Lets see the results
+print(net.results$net.result)
+
+output <- cbind(testdata,sqrt(testdata),as.data.frame(net.results$net.result))
+
+colnames(output) <- c("Input","Expected Output","Neural Net Output")
+
+print(output)
+
+#BE CAREFUL WITH EXTRAPOLATING!! 
 # ---------------------------------------------------------------------------------------------------------------------
 # BOSTON HOUSING
 # ---------------------------------------------------------------------------------------------------------------------
@@ -49,6 +63,7 @@ set.seed(500)
 library(MASS)
 
 housing <- Boston
+head(housing)
 
 # When taking in a previous dataset ensure there are no missing datapoints
 apply(housing,2,function(x) sum(is.na(x)))
@@ -73,6 +88,7 @@ test.s <- scaled[-index,]
 # We get around this by doing the following:
 n <- names(train.s[,-14])
 form <- as.formula(paste("medv ~", paste(n, collapse = " + ")))
+form
 nn <- neuralnet(form,data=train.s,hidden=c(5,3),linear.output=T)
 plot(nn)
 
