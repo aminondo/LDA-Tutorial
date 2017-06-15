@@ -26,14 +26,14 @@ plot(lda_fit)
 
 #predict using test data
 lda_predict = predict(lda_fit, newdata = market_data$test)
-plot(lda_predict)
 #confusion matrix to establish how accurate our results are
-table(lda_predict$class,market_data$test$Direction)
-
+tbl = table(lda_predict$class,market_data$test$Direction)
+sum(diag(tbl))/sum(tbl)
 
 #VISUALIZING--------------------------------------------------------------
 #working with iris data set
 lda_fit = lda(Species ~ ., data=iris)
+lda_fit
 lda_predict = predict(lda_fit, iris)
 lda_predict
 table(lda_predict$class,iris$Species)
@@ -70,6 +70,8 @@ lda_fit = lda(survived ~ .,data=data$train)
 lda_fit
 plot(lda_fit)
 lda_predict = predict(lda_fit, newdata = data$test)
+#names(lda_predict)
+#ldahist(lda_predict$x, g=class)
 table(lda_predict$class,data$test$survived)
 
 
