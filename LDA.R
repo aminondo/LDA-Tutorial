@@ -88,3 +88,15 @@ lda_fit
 
 lda_predict = predict(lda_fit, newdata=def_data$test)
 table(lda_predict$class,def_data$test$default)
+
+
+#blue and red data points
+#load("../../iX-rModules/lectures/red-blue-points.RData")
+#train.index = sample(c(T,F), nrow(known), replace=T, prob = c(.8,.2))
+#known_data = split(known, train.index) 
+#names(known_data) = c("test", "train")
+
+#lda_fit = lda(colour ~ ., data=known_data$train)
+#plot(lda_fit)
+#lda_predict = predict(lda_fit, newdata=known_data$test)
+#table(lda_predict$class,known_data$test$colour)

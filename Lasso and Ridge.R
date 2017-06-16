@@ -6,15 +6,16 @@
 
 install.packages("glmnet")
 install.packages("lars")
-install.packakes("foreach")
+install.packages("foreach")
 install.packages("lasso2")
 install.packages("MASS")
 install.packages("ISLR")
 
 library(MASS)
 library(ISLR)
-
+View(Hitters)
 hitters = na.omit(Hitters)
+View(hitters)
 with(hitters, sum(is.na(Salary)))
 
 

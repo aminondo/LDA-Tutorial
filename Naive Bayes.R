@@ -11,8 +11,9 @@ nb <- naive_bayes(Species ~ ., data = iris)  #Naive Bayes Plot
 plot(nb, ask = TRUE) # Density plots for Species (response variable) and each explanatory variable
 
 
-#nb_kernel <- naive_bayes(x = iris[-5], y = iris[ ,5], usekernel = T) #Naive Bayes Plot using kernel
-#plot(nb_kernel, ask=TRUE)
+
+nb_kernel <- naive_bayes(x = iris[-5], y = iris[ ,5], usekernel = T) #Naive Bayes Plot using kernel
+plot(nb_kernel, ask=TRUE)
 
 library(rpart)
 library(party)
@@ -54,7 +55,7 @@ bayes_theor(prob_fair, prob_heads, prob_heads_given_fair)
 # ---------------------------------------------------------------------------------------------------------------------
 #Example 3 Naive Bayes: Red and Blue Dots 
 # ---------------------------------------------------------------------------------------------------------------------
-load("/Users/piyushkumar/Desktop/Day 12/red-blue-points.RData")
+#load("/Users/piyushkumar/Desktop/Day 12/red-blue-points.RData")
 summary(known)
 #sum(known$colour == "blue")   194
 #sum(known$colour == "red")    106

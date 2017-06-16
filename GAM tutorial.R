@@ -4,7 +4,7 @@ library(ISLR)
 install.packages("gam")
 library(gam)
 ## Split data set
-Wage = ISLR::Wage
+Wage = Wage
 plot(wage ~ year,data = Wage )
 Wage = Wage[Wage$wage <175,]
 Wage = Wage[Wage$wage > 50,]
@@ -34,11 +34,12 @@ anova(year0,year1,year2,year3,year4)
 ## check if age is statistically significant ##
 plot(wage ~ age)
 age0 =gam(wage ~ education + s(year,1), data = Wage$train)
-age1 =
-age2 =
-age3 =
-age4 =
-anova()
+age1 =gam(wage ~ education + s(year,1)+s(age,1), data = Wage$train)
+age2 =gam(wage ~ education + s(year,1)+s(age,2), data = Wage$train)
+age3 =gam(wage ~ education + s(year,1)+s(age,3), data = Wage$train)
+age4 =gam(wage ~ education + s(year,1)+s(age,4), data = Wage$train)
+age5 = gam(wage ~ education + s(year,1)+s(age,5), data = Wage$train)
+anova(age0,age1,age2,age3,age4,age5)
 
 ##
 
@@ -62,8 +63,9 @@ error = function(actual, prediction){
   abs(prediction - actual)/actual
 }
 
-fit_f = gam(wage ~ education + s(year,1) + s(age, 3) + health, data = Wage$train)
+fit_f = gam(wage ~ education + s(year,1) + s(age, 3) + health + race, data = Wage$train)
 class(fit_f)
+par(mfrow=c(2,2), gam:: plot.gam(fit_f))
 Wage$test$predictions = predict(fit_f, newdata = Wage$test)
 Wage$test$error = error(Wage$test$wage, Wage$test$predictions)
 avg_error = mean(Wage$test$error)
@@ -76,7 +78,7 @@ nrow(Wage$test)
 ####################################################################################
 
 ##LOAD RED BLUE Data##
-load("C:/Users/Student/Downloads/red-blue-points.RData")
+#load("C:/Users/Student/Downloads/red-blue-points.RData")
 View(known)
 known$bin = ifelse(known$colour == "blue", TRUE, FALSE)
 train.index = sample(c(T, F), nrow(known), replace = TRUE, prob = c(0.8, 0.2))
